@@ -29,7 +29,7 @@ class Client(threading.Thread):
     def run(self):
         ''' Main Execution. '''
         num1, num2 = self.generate_numbers()
-        print('Client ID - %s. Numbers to be added - %s and %s' % (self.identity, num1, num2))
+        print('Client ID - %s. Numbers to be added - %s and %s.' % (self.identity, num1, num2))
         socket = self.get_connection()
         
         # Poller is used to check for availability of data to be read through the socket.
@@ -46,7 +46,7 @@ class Client(threading.Thread):
             # If socket has data to be read.
             if socket in sockets and sockets[socket] == zmq.POLLIN:
                 result = self.receive(socket)
-                print('Client ID - %s. Numbers sent to be added - %s and %s. Received result - %s' % (self.identity, num1, num2, result))
+                print('Client ID - %s. Numbers sent to be added - %s and %s. Received result - %s.' % (self.identity, num1, num2, result))
                 break
 
         socket.close()
