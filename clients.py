@@ -79,5 +79,5 @@ class Client(threading.Thread):
 
 if __name__ == '__main__':
     for i in range(1,4):
-        client = Client(i)
+        client = Client(str(i))
         client.start()
