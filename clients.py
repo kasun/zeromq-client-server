@@ -14,3 +14,25 @@
 # Author - Kasun Herath <kasunh01 at gmail.com>
 # Source - https://github.com/kasun/
 
+import threading
+
+class Client(threading.Thread):
+    ''' Represents an example client '''
+    def __init__(self, identity):
+        threading.Thread.__init__(self)
+        self.identity = identity
+
+    def run(self):
+        num1, num2 = self.generate_numbers()
+
+    def send(self, socket, data):
+        pass
+
+    def receive(self, socket):
+        pass 
+
+    def get_connection(self):
+        pass
+
+    def generate_numbers(self):
+        pass
