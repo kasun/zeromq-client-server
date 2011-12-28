@@ -8,8 +8,8 @@ Demonstrables:
     +   Fair distribution of work among workers.
 
 ## Requirements ##
-    +   Zeromq [<http://www.zeromq.org/>] (http://www.zeromq.org/)
-    +   pyzmq [<https://github.com/zeromq/pyzmq>] (https://github.com/zeromq/pyzmq)
+    +   Zeromq [<http://www.zeromq.org/>](http://www.zeromq.org/)
+    +   pyzmq [<https://github.com/zeromq/pyzmq>](https://github.com/zeromq/pyzmq)
 
 ## Run ##
     +   python server.py
