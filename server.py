@@ -13,3 +13,15 @@
 # Author - Kasun Herath <kasunh01 at gmail.com>
 # Source - https://github.com/kasun/
 
+class Server(object):
+    ''' Front facing server. 
+        Instantiate workers, Accept client connections, distribute computation requests among workers and route computed results back to clients. '''
+
+    def __init__(self):
+        pass
+
+    def start(self):
+        pass
+
+if __name__ == '__main__':
+    server = Server().start()
