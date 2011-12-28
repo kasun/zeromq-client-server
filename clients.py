@@ -8,8 +8,8 @@
     Once the computed result is recieved from the server it would be printed to standard out. 
 
     Demonstrables:
-        Multiple client architecture.
-        Response getting delivered to correct client. '''
+        Multiple clients connecting to same server.
+        Clients receiving correct response. '''
 
 # Author - Kasun Herath <kasunh01 at gmail.com>
 # Source - https://github.com/kasun/
@@ -27,12 +27,12 @@ class Client(threading.Thread):
         self.zmq_context = zmq.Context()
 
     def run(self):
-        ''' Main Execution. '''
+        ''' Connects to server. Send compute request, poll for and print result to standard out. '''
         num1, num2 = self.generate_numbers()
         print('Client ID - %s. Numbers to be added - %s and %s.' % (self.identity, num1, num2))
         socket = self.get_connection()
         
-        # Poller is used to check for availability of data to be read through the socket.
+        # Poller is used to check for availability of data before reading from a socket.
         poller = zmq.Poller()
         poller.register(socket, zmq.POLLIN)
         self.send(socket, '%s:%s' % (num1, num2))
@@ -78,6 +78,7 @@ class Client(threading.Thread):
         return num1, num2
 
 if __name__ == '__main__':
+    # Instantiate three clients with different ID's.
     for i in range(1,4):
         client = Client(str(i))
         client.start()
