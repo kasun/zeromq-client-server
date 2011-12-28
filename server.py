@@ -40,6 +40,11 @@ class Server(object):
             worker.start()
 
         # Use built in queue device to distribute requests among workers.
+        # What queue device does internally is,
+        #   1. Read a client's socket ID and request.
+        #   2. Send socket ID and request to a worker.
+        #   3. Read a client's socket ID and result from a worker.
+        #   4. Route result back to the client using socket ID. 
         zmq.device(zmq.QUEUE, socket_front, socket_back)
 
 class Worker(threading.Thread):
