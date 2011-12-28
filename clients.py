@@ -12,7 +12,7 @@
         Clients receiving correct response. '''
 
 # Author - Kasun Herath <kasunh01 at gmail.com>
-# Source - https://github.com/kasun/
+# Source - https://github.com/kasun/zeromq-client-server.git
 
 import threading
 from random import choice
