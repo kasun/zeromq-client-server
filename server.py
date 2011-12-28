@@ -18,14 +18,16 @@ import threading
 import zmq
 
 class Server(object):
-    ''' Front facing server. 
-        Instantiate workers, Accept client connections, distribute computation requests among workers and route computed results back to clients. '''
+    ''' Front facing server. '''
 
     def __init__(self):
         self.zmq_context = zmq.Context()
 
     def start(self):
-        ''' Main execution. '''
+        ''' Main execution. 
+            Instantiate workers, Accept client connections, 
+            distribute computation requests among workers and route computed results back to clients. '''
+
         # Front facing socket to accept client connections.
         socket_front = self.zmq_context.socket(zmq.ROUTER)
         socket_front.bind('tcp://127.0.0.1:5001')
@@ -53,8 +55,8 @@ class Worker(threading.Thread):
 
     def __init__(self, zmq_context, _id):
         threading.Thread.__init__(self)
-        self.worker_id = _id
         self.zmq_context = zmq_context
+        self.worker_id = _id
 
     def run(self):
         ''' Main execution. '''
