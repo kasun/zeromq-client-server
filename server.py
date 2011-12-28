@@ -13,6 +13,10 @@
 # Author - Kasun Herath <kasunh01 at gmail.com>
 # Source - https://github.com/kasun/
 
+import threading
+
+import zmq
+
 class Server(object):
     ''' Front facing server. 
         Instantiate workers, Accept client connections, distribute computation requests among workers and route computed results back to clients. '''
@@ -22,6 +26,33 @@ class Server(object):
 
     def start(self):
         pass
+
+class Worker(threading.Thread):
+    ''' Workers accept computation requests from front facing server.
+        Does computations and return results back to server. '''
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.zmq_context = zmq.Context()
+
+    def run(self):
+        ''' Main execution. '''
+        socket = self.zmq_context.socket(zmq.DEALER)
+
+        while True:
+            # First string recieved is client ID
+            client_id = socket.recv()
+            request = socket.recv()
+            result = self.compute(request)
+
+            # For successful route of result to correct client first the client ID should be sent
+            socket.send(client_id, zmq.SNDMORE)
+            socket.send(result)
+
+    def compute(self, request):
+        ''' Computation takes place here. Adds the two numbers which are in the request and return result. '''
+        numbers = request.split(':')
+        return str(int(numbers[0]) + int(numbers[1]))
 
 if __name__ == '__main__':
     server = Server().start()
